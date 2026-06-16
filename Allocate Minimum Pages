@@ -1,0 +1,46 @@
+class Solution {
+    public int findPages(int[] arr, int k) {
+
+        int l=0; int h=0;
+        int n=arr.length;
+        if(n<k){
+            return -1;
+        }
+        int res=0;
+        for(int i=0; i<n; i++){
+            l = Math.max(l, arr[i]);
+            h = h+arr[i];
+        }
+        
+        while(l<=h){
+            int m = (l+h)/2;
+            
+            if(fun(arr, n, m, k)){
+                res =m;
+                h = m-1;
+            }
+            else{
+                l=m+1;
+            }
+        }
+        return res;
+    }
+    
+    public boolean fun(int[] arr, int n, int m, int k){
+        int stu = 1;
+        int page =0;
+        for(int i=0;i<n;i++){
+            if(page + arr[i]<= m){
+                page = page+arr[i];
+            }
+            else {
+                stu++;
+                page = arr[i];
+                if(stu>k){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
