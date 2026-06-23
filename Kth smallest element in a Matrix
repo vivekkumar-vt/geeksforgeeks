@@ -1,0 +1,34 @@
+class Solution {
+    public int kthSmallest(int[][] mat, int k) {
+        int n= mat.length; int m= mat[0].length;
+        int ans=-1; 
+        int l=mat[0][0]; int h= mat[n-1][m-1];
+        while(l<=h){
+            int gus = (l+h)/2;
+            int a = fun(mat, n,m, gus);
+            
+            if(a<k){
+                l=gus+1;
+            }
+            else{
+                ans = gus;
+                h= gus-1;
+            }
+        }
+        return ans;
+        
+    }
+    public int fun(int [][] mat , int n, int m , int gus){
+        int r=n-1; int c=0; int count =0;
+        while(r>=0 && c<m){
+            if(mat[r][c]<= gus){
+                count = count + r+1;
+                c++;
+            }
+            else{
+                r--;
+            }
+        }
+        return count;
+    }
+}
