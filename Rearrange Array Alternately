@@ -1,0 +1,23 @@
+class Solution {
+    public void rearrange(int arr[]) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        int j = n-1;
+        int i= 0;
+        long maxEle= (long)arr[n-1]+1;
+        for(int k=0;k<n;k++){
+
+            if(k%2 == 0){
+                arr[k] += (arr[j] % maxEle) * maxEle;
+                j--;
+            }else{
+                arr[k] += (arr[i] % maxEle) * maxEle;
+                i++;
+            }
+        }
+        for (int k=0;k<n;k++){
+            arr[k] /= maxEle;
+        }
+        
+    }
+}
